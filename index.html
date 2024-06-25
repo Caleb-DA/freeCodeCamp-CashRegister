@@ -96,7 +96,7 @@ document.getElementById("Exact Changes Disburse Pattern").innerHTML = array_Payo
 
 $sum=0;
 for (let i = 0; i < array_Unit.length; i++)
-{ if (array_Payout[i] < array_Amount[i])
+{ if (array_Payout[i] <= array_Amount[i])
   { array_Amount[i]=array_Amount[i] - array_Payout[i];
     $sum +=array_Amount[i]*array_Unit[i];
   }
