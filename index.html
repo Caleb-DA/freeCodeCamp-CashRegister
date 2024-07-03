@@ -1,0 +1,219 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>
+    freeCodeCamp-CashRegister 
+    </title>
+</head>
+<body>
+<h1>Cash Register</h1>
+<img src="https://tse3.mm.bing.net/th?id=OIP.qfUy-T07R-13W4F0vVwG4wHaG8&pid=Api" alt="Cash Register">  
+
+100dollar:<textarea id="#100dollar">
+how many 100dollars</textarea>
+<button type="button" onclick="count100Dollar()">100dollarInput</button>
+50dollar:<textarea id="#50dollar">
+how many 50dollars</textarea>
+<button type="button" onclick="count50Dollar()">50dollarInput</button> 
+20dollar:<textarea id="#20dollar">
+how many 20dollars</textarea>
+<button type="button" onclick="count20Dollar()">20dollarInput</button>
+10dollar:<textarea id="#10dollar">
+how many 10dollars</textarea>
+<button type="button" onclick="count10Dollar()">10dollarInput</button>
+5dollar:<textarea id="#5dollar">
+how many 5dollars</textarea>
+<button type="button" onclick="count5Dollar()">5dollarInput</button><br>
+
+dollar:<textarea id="#dollar">
+how many dollars</textarea>
+<button type="button" onclick="countDollar()">dollarInput</button>
+quarter:<textarea id="#quarter">
+how many quarters</textarea>
+<button type="button" onclick="countQuarter()">quarterInput</button> 
+dime:<textarea id="#dime">
+how many dimes</textarea>
+<button type="button" onclick="countDime()">dimeInput</button>
+nickel:<textarea id="#nickel">
+how many nickels</textarea>
+<button type="button" onclick="countNickel()">nickelInput</button>
+penny:<textarea id="#penny">
+how many pennies</textarea>
+<button type="button" onclick="countPenny()">pennyInput</button><br>
+
+<p id="demo#penny"></p>    
+<p id="Quantities#1"></p> 
+
+<p>//Initiate the Money Tray - this is how much money we have in the cash register</p><button type="button" onclick="Tabulate()">CountCash</button>  
+<p>//Cash in Avavilable Denominations</p>
+<p id="Denomination"></p> 
+<p id="Quantities#2"></p> 
+<p id="AvailableCash"></p>
+  
+<p>//Customer walks in & Buys an item for $?? and Pays $?? and Change=??</p>
+
+Customer Purchase:<br>
+<textarea id="Textarea#1">
+How much it cost</textarea>
+<button type="button" onclick="CustomerInput1()">Input1</button>
+<p id="demo1"></p>  
+  
+Money_Paid:<br>
+<textarea id="Textarea#2">
+How much he paid</textarea>
+<button type="button" onclick="CustomerInput2()">Input2</button>
+<p id="demo2"></p>    
+
+<p>//Calculate the amount of exact changes to be disbursed</p>
+<button type="button" onclick="Calculate()">Checking</button>
+<p id="Purchase & Paid"></p>   
+<p id="Exact Changes Disburse Pattern"></p>
+
+<p>//Disburse Exact Changes from the Money Tray, How much left in the Cash Register after Transaction??</p>
+<p id="Final Amount of Cash in the Register"></p>
+ 
+<p>//Alert - If there is Insufficient Level of Exact Changes in the Cash Register </p>
+
+<p id="i"></p>
+<span style='font-size:100px;'>&#9749;</span>
+ 
+</body>
+</html>
+
+<style>
+head{
+x-sizing: border-box;
+}
+h1 {
+    display: flex;
+    justify-content: center;
+    background-color: #228B22;
+    font-family: cursive;
+    font-size: 90px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+img {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 800px;
+    height: 400px;
+}
+
+* {text-align: center;
+  color: #00008B
+}
+</style>
+
+<script>
+const array_Label= ["$100","$50","$20","$10","$5","$1","$0.25","$0.1","$0.05","$0.01"];
+var $Purchase = 0;
+var $Money_Paid = 0;
+var $sum = 0;
+var $final = 0;
+var array_Unit= [100.00,50.00,20.00,10.00,5.00,1.00,0.25,0.10,0.05,0.01];
+var array_Amount=[0,0,0,0,0,0,0,0,0,0];
+
+function count100Dollar() {
+  var z0 = document.getElementById("#100dollar").value;
+  array_Amount[0] = z0*1;
+}
+function count50Dollar() {
+  var z1 = document.getElementById("#50dollar").value;
+  array_Amount[1] = z1*1;
+}
+function count20Dollar() {
+  var z2 = document.getElementById("#20dollar").value;
+  array_Amount[2] = z2*1;
+}
+function count10Dollar() {
+  var z3 = document.getElementById("#10dollar").value;
+  array_Amount[3] = z3*1;
+}
+function count5Dollar() {
+  var z4 = document.getElementById("#5dollar").value;
+  array_Amount[4] = z4*1;
+}
+
+function countDollar() {
+  var z5 = document.getElementById("#dollar").value;
+  array_Amount[5] = z5*1;
+}
+function countQuarter() {
+  var z6 = document.getElementById("#quarter").value;
+  array_Amount[6] = z6*1;
+}
+function countDime() {
+  var z7 = document.getElementById("#dime").value;
+  array_Amount[7] = z7*1;
+}
+function countNickel() {
+  var z8 = document.getElementById("#nickel").value;
+  array_Amount[8] = z8*1;
+}
+function countPenny() {
+  var z9 = document.getElementById("#penny").value;
+  array_Amount[9] = z9*1;
+  document.getElementById("demo#penny").innerHTML = array_Amount[9];
+  document.getElementById("Quantities#1").innerHTML = array_Amount.toString();
+}
+
+function Tabulate() {
+//*Find the total amount in the Cash Register 
+$sum = 0;
+for (var i=0; i < 10; i++)
+{$sum +=array_Amount[i]*array_Unit[i]}
+document.getElementById("Denomination").innerHTML = array_Label.toString();
+document.getElementById("Quantities#2").innerHTML = array_Amount.toString();
+$sum=$sum.toFixed(2);  
+document.getElementById("AvailableCash").innerHTML = "Total money in the Cash Register = " + " $" + $sum;  
+}
+
+function CustomerInput1() {
+  var x = document.getElementById("Textarea#1").value;
+  $Purchase = x*1;
+  document.getElementById("demo1").innerHTML = $Purchase;
+}
+function CustomerInput2() {
+  var y = document.getElementById("Textarea#2").value;
+  $Money_Paid = y*1;
+  document.getElementById("demo2").innerHTML = $Money_Paid;
+
+}
+
+function Calculate() {
+$Change_Back=$Money_Paid - $Purchase;
+$Change_Back = $Change_Back.toFixed(2);
+document.getElementById("Purchase & Paid").innerHTML = "Money_Paid =    $" + $Money_Paid + "," + " Purchase = $ "  + $Purchase +  "," +" Change_Back = $ " + $Change_Back;
+
+array_Payout=[0,0,0,0,0,0,0,0,0];
+
+for (let i = 0; i < array_Unit.length; i++)
+{ num=$Change_Back/array_Unit[i];
+  if (num < 1 )
+  {array_Payout[i]=0;
+  }
+  else {array_Payout[i]=Math.floor(num);
+  $Change_Back=$Change_Back-array_Payout[i]*array_Unit[i];
+  $Change_Back = $Change_Back.toFixed(2);
+ }
+}
+document.getElementById("Exact Changes Disburse Pattern").innerHTML = array_Payout;
+
+$sum=0;
+for (let i = 0; i < array_Unit.length; i++)
+{ if (array_Payout[i] <= array_Amount[i])
+  { array_Amount[i]=array_Amount[i] - array_Payout[i];
+    $sum +=array_Amount[i]*array_Unit[i];
+  }
+  else {document.getElementById("i").innerHTML = "Insufficient change in the denomination.." + array_Label[i] + ", " + array_Payout[i] + "  >  " + array_Amount[i];}
+}
+
+//*How much cash left in the Money Tray?
+$final=$sum + $Money_Paid;
+$final=$final.toFixed(2);  
+document.getElementById("Final Amount of Cash in the Register").innerHTML = "Final Amount of Cash in the Register = " + " $" + $final;
+}
+</script>
